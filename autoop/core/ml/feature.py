@@ -1,9 +1,9 @@
-
-from pydantic import BaseModel, Field
-from typing import Literal
+from pydantic import BaseModel, Field, field_validator
+from typing import Literal, Optional
 import numpy as np
 
 from autoop.core.ml.dataset import Dataset
+
 
 class Feature(BaseModel):
     # attributes here

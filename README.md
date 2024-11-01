@@ -151,11 +151,11 @@ If the feature has been implemented by both students, write `both`.
 
 If you did not implement the feature
 
-| Requirement                           | Type (FN/NF) | Implemented by       | Implementation Completed (add X if done) | Comment |
+| Requirement                           | Type (FN/NF) | Implemented by       | Implementation Completed (add X if done) | Comment | 
 |-------------------------------------- |--------------|----------------------|--------------------------|---------|         
-| Up-to-date requirements.txt           | NF           |                      |         | |
-| `ML/detect-features`                  | FN           |                      |         | |
-| `ML/artifact`                         | NF           |                      |         | |
+| Up-to-date requirements.txt           | NF           |  Lennart                    |   X      | | 
+| `ML/detect-features`                  | FN           |  Lennart                    |         | |
+| `ML/artifact`                         | NF           |  Lennart                    |         | |
 | `ML/feature`                          | NF           |                      |         | |
 | `ML/metric`                           | NF           |                      |         | |
 | `ML/metric/extensions`                | FN           |                      |         | |
