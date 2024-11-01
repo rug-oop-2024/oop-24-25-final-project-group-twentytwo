@@ -1,0 +1,7 @@
+[tool.ruff]
+line-length = 79  # Set your preferred line length
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "C90"]  # Include other error codes you want to check for
+ignore = ["ANN101", "ANN102", "D100", "D2", "D4", "ANN002", "ANN003", "F401"]  # Exclude specific rules
+exclude = ["autoop/tests", ".github"]  # Exclude specific directories
