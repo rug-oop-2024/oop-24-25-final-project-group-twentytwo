@@ -154,11 +154,11 @@ If you did not implement the feature
 | Requirement                           | Type (FN/NF) | Implemented by       | Implementation Completed (add X if done) | Comment | 
 |-------------------------------------- |--------------|----------------------|--------------------------|---------|         
 | Up-to-date requirements.txt           | NF           |  Lennart                    |   X      | | 
-| `ML/detect-features`                  | FN           |  Lennart                    |         | |
-| `ML/artifact`                         | NF           |  Lennart                    |         | |
-| `ML/feature`                          | NF           |                      |         | |
-| `ML/metric`                           | NF           |                      |         | |
-| `ML/metric/extensions`                | FN           |                      |         | |
+| `ML/detect-features`                  | FN           |  Lennart                    |   X      | |
+| `ML/artifact`                         | NF           |  Lennart                    |         | | Nog testen
+| `ML/feature`                          | NF           |  Lennart                    |         | | Nog testen
+| `ML/metric`                           | NF           |  Lennart                    |   X     | |
+| `ML/metric/extensions`                | FN           |  Lennart                    |   X      | |
 | `ML/model`                            | NF           |                      |         | |
 | `ML/model/extensions`                 | FN           |                      |         | |
 | `ML/pipeline/evaluation`              | FN           |                      |         | | 
