@@ -1,12 +1,13 @@
 from pydantic import BaseModel, Field
-from abc import ABC, abstractmethod
 import base64
+import re
 from typing import Optional, Dict, List
 
-class Artifact(BaseModel, ABC):
+class Artifact(BaseModel):
     asset_path: str = Field(..., description="Path to asset")
-    version: str = Field(..., description="Version of artefact")
-    data: bytes = Field(..., description="Binary data of the asset")
+    name: str = Field(..., description="Name of the artifact")
+    version: str = Field(..., description="Version of artifact")
+    data: Optional[bytes] = Field(..., description="Binary data of the asset")
     metadata: Optional[Dict[str,str]] = Field(default_factory=dict, description="additional data")
     type: str = Field(..., description="Type of the artifact")
     tags: List[str] = Field(default_factory=list, description="Tags for categorising the artifact")
@@ -14,15 +15,16 @@ class Artifact(BaseModel, ABC):
     @property
     def id(self) -> str:
         """Generates an ID based on the asset path and version"""
-        encoded_path = base64.b64encode(self.asset_path.encode()).decode()
-        return f"{encoded_path}:{self.version}"
+        encoded_path = base64.b64encode(self.asset_path.encode()).decode().rstrip("=")
+        safe_version = re.sub(r'[:;,.=]', '_', self.version)
+        return f"{encoded_path}:{safe_version}"
 
-    @abstractmethod
     def save(self, data: bytes) -> bytes:
-        """Abstract mehtod to save data into the artifact."""
-        pass
+        """Abstract method to save data into the artifact."""
+        self.data = data
 
-    @abstractmethod
     def read(self) -> bytes:
-        """Abstract mehtod to read data into the artifact."""
-        pass
+        """Abstract method to read data into the artifact."""
+        if self.data is None:
+            raise ValueError("No data available to read.")
+        return self.data

@@ -10,6 +10,9 @@ class Metric(ABC):
         """Compute the metric with ground truth and predicted values."""
         pass
 
+    def evaluate(self, gt: np.ndarray, pred: np.ndarray) -> float:
+        return self.__call__(gt,pred)
+
 
 # Regression Metrics (adapted from: https://machinelearningmastery.com/regression-metrics-for-machine-learning/)
 
@@ -19,6 +22,7 @@ class MeanSquaredError(Metric):
 
     def __call__(self, gt: np.ndarray, pred: np.ndarray) -> float:
         return np.mean((gt - pred) ** 2)
+
 
 
 class RootMeanSquaredError(Metric):
@@ -87,3 +91,4 @@ def get_metric(name: str) -> Metric:
         return METRICS[name]()
     except KeyError:
         raise ValueError(f"Not supported metric: {name}")
+

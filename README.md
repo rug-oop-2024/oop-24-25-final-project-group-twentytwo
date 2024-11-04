@@ -154,14 +154,14 @@ If you did not implement the feature
 | Requirement                           | Type (FN/NF) | Implemented by       | Implementation Completed (add X if done) | Comment | 
 |-------------------------------------- |--------------|----------------------|--------------------------|---------|         
 | Up-to-date requirements.txt           | NF           |  Lennart                    |   X      | | 
-| `ML/detect-features`                  | FN           |  Lennart                    |   X      | |
-| `ML/artifact`                         | NF           |  Lennart                    |         | | Nog testen
-| `ML/feature`                          | NF           |  Lennart                    |         | | Nog testen
+| `ML/detect-features`                  | FN           |  Lennart                    |   X      |In alle ML nog style en typehints! docstrings en import (volgorde) zijn nog uitgeschakelt in pyproject.toml (later nog toevoegen wanneer alle code goed is) |
+| `ML/artifact`                         | NF           |  Lennart                    |         | Nog testen| 
+| `ML/feature`                          | NF           |  Lennart                    |         | Nog testen| 
 | `ML/metric`                           | NF           |  Lennart                    |   X     | |
-| `ML/metric/extensions`                | FN           |  Lennart                    |   X      | |
-| `ML/model`                            | NF           |                      |         | |
-| `ML/model/extensions`                 | FN           |                      |         | |
-| `ML/pipeline/evaluation`              | FN           |                      |         | | 
+| `ML/metric/extensions`                | FN           |  Lennart                    |   X      | Zie __init__.py |
+| `ML/model`                            | NF           |                      |    X     | |
+| `ML/model/extensions`                 | FN           |                      |    X     | In regressin is nog een import die we denk ik moeten gebruiken|
+| `ML/pipeline/evaluation`              | FN           |                      |    X     | Alle tests zijn ok| 
 | `ST/page/datasets`                    | NF           |                      |         | |
 | `ST/datasets/management/create`       | FN           |                      |         | |
 | `ST/datasets/management/save`         | FN           |                      |         | |

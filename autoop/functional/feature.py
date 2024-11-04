@@ -20,7 +20,7 @@ def detect_feature_types(dataset: Dataset) -> List[Feature]:
         else:
             feature_type = "categorical"
 
-        feature = Feature(name=column_name, feature_type=feature_type)
+        feature = Feature(name=column_name, type=feature_type)
         feature_list.append(feature)
 
     return feature_list
