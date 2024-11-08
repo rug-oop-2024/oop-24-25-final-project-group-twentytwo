@@ -1,5 +1,6 @@
 import numpy as np
-from sklearn.linear_model import LogisticRegression, LinearRegression
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
 from autoop.core.ml.model.model import Model
@@ -7,12 +8,12 @@ from autoop.core.ml.model.regression import MultipleLinearRegression
 
 
 # 1. Logistic Regression Classifier
-class LogisticRegressionModel(Model):
-    def __init__(self, name: str = "LogisticRegression"):
-        super().__init__(name)
-        self.model = LogisticRegression()
+class RandomForestClassifierModel(Model):
+    def __init__(self, name: str = "RandomForestClassifier", type = "classification"):
+        super().__init__(name, type)
+        self.model = RandomForestClassifier()
 
-    def train(self, X: np.ndarray, y: np.ndarray) -> None:
+    def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         self.model.fit(X, y)
         self.is_trained = True
 
@@ -22,11 +23,11 @@ class LogisticRegressionModel(Model):
 
 # 2. Decision Tree Classifier
 class DecisionTreeClassifierModel(Model):
-    def __init__(self, name: str = "DecisionTreeClassifier"):
-        super().__init__(name)
+    def __init__(self, name: str = "DecisionTreeClassifier", type = "classification"):
+        super().__init__(name, type)
         self.model = DecisionTreeClassifier()
 
-    def train(self, X: np.ndarray, y: np.ndarray) -> None:
+    def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         self.model.fit(X, y)
         self.is_trained = True
 
@@ -36,11 +37,11 @@ class DecisionTreeClassifierModel(Model):
 
 # 3. K-Nearest Neighbors Classifier
 class KNeighborsClassifierModel(Model):
-    def __init__(self, name: str = "KNeighborsClassifier"):
-        super().__init__(name)
+    def __init__(self, name: str = "KNeighborsClassifier", type = "classification"):
+        super().__init__(name, type)
         self.model = KNeighborsClassifier()
 
-    def train(self, X: np.ndarray, y: np.ndarray) -> None:
+    def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         self.model.fit(X, y)
         self.is_trained = True
 
@@ -50,11 +51,11 @@ class KNeighborsClassifierModel(Model):
 
 # 4. Linear Regression
 class LinearRegressionModel(Model):
-    def __init__(self, name: str = "LinearRegression"):
-        super().__init__(name)
+    def __init__(self, name: str = "LinearRegression", type="regression"):
+        super().__init__(name, type)
         self.model = LinearRegression()
 
-    def train(self, X: np.ndarray, y: np.ndarray) -> None:
+    def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         self.model.fit(X, y)
         self.is_trained = True
 
@@ -64,11 +65,11 @@ class LinearRegressionModel(Model):
 
 # 5. Decision Tree Regressor
 class DecisionTreeRegressorModel(Model):
-    def __init__(self, name: str = "DecisionTreeRegressor"):
-        super().__init__(name)
+    def __init__(self, name: str = "DecisionTreeRegressor", type = "regression"):
+        super().__init__(name, type)
         self.model = DecisionTreeRegressor()
 
-    def train(self, X: np.ndarray, y: np.ndarray) -> None:
+    def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         self.model.fit(X, y)
         self.is_trained = True
 
@@ -78,11 +79,11 @@ class DecisionTreeRegressorModel(Model):
 
 # 6. K-Nearest Neighbors Regressor
 class KNeighborsRegressorModel(Model):
-    def __init__(self, name: str = "KNeighborsRegressor"):
-        super().__init__(name)
+    def __init__(self, name: str = "KNeighborsRegressor", type = "regression"):
+        super().__init__(name, type)
         self.model = KNeighborsRegressor()
 
-    def train(self, X: np.ndarray, y: np.ndarray) -> None:
+    def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         self.model.fit(X, y)
         self.is_trained = True
 
@@ -98,7 +99,7 @@ REGRESSION_MODELS = [
 ]
 
 CLASSIFICATION_MODELS = [
-    "LogisticRegression",
+    "RandomForestClassifier",
     "DecisionTreeClassifier",
     "KNeighborsClassifier",
 ]
@@ -107,7 +108,7 @@ CLASSIFICATION_MODELS = [
 def get_model(model_name: str) -> Model:
     """Factory function to get a model by name."""
     models = {
-        "LogisticRegression": LogisticRegressionModel,
+        "RandomForestClassifier": RandomForestClassifierModel,
         "DecisionTreeClassifier": DecisionTreeClassifierModel,
         "KNeighborsClassifier": KNeighborsClassifierModel,
         "LinearRegression": LinearRegressionModel,

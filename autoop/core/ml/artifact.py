@@ -11,16 +11,17 @@ class Artifact(BaseModel):
     metadata: Optional[Dict[str,str]] = Field(default_factory=dict, description="additional data")
     type: str = Field(..., description="Type of the artifact")
     tags: List[str] = Field(default_factory=list, description="Tags for categorising the artifact")
+    data: bytes
 
     @property
     def id(self) -> str:
         """Generates an ID based on the asset path and version"""
         encoded_path = base64.b64encode(self.asset_path.encode()).decode().rstrip("=")
         safe_version = re.sub(r'[:;,.=]', '_', self.version)
-        return f"{encoded_path}:{safe_version}"
+        return f"{encoded_path}{safe_version}"
 
     def save(self, data: bytes) -> bytes:
-        """Abstract method to save data into the artifact."""
+        """Method to save data into the artifact."""
         self.data = data
 
     def read(self) -> bytes:

@@ -7,13 +7,14 @@ from typing import Literal, Any
 
 
 class Model(ABC):
-    def __init__(self, name: str):
+    def __init__(self, name: str, type:Literal["classification", "regression"]):
         self.name = name
         self._parameters = {}
         self.is_trained = False
+        self.type = type
 
     @abstractmethod
-    def train(self, X: np.ndarray, y: np.ndarray) -> None:
+    def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         pass
 
     @abstractmethod
