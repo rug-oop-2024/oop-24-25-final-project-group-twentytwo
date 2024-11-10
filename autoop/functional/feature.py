@@ -17,7 +17,7 @@ def detect_feature_types(dataset: Dataset) -> List[Feature]:
         and detected types (either 'numerical' or 'categorical')
         for each column in the dataset.
     """
-    feature_list = []
+    _feature_list = []
 
     data = dataset.read()
 
@@ -28,6 +28,6 @@ def detect_feature_types(dataset: Dataset) -> List[Feature]:
             feature_type = "categorical"
 
         feature = Feature(name=column_name, type=feature_type)
-        feature_list.append(feature)
+        _feature_list.append(feature)
 
-    return feature_list
+    return _feature_list

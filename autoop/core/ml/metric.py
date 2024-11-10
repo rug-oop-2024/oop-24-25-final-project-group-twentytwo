@@ -11,11 +11,20 @@ class Metric(ABC):
     predicted values.
 
     Attributes:
-        task_type (Literal["Regression", "Classification"]): Type of task
+        _task_type (Literal["Regression", "Classification"]): Type of task
             the metric is used for, either "Regression" or "Classification".
     """
 
-    task_type: Literal["Regression", "Classification"]
+    _task_type: Literal["Regression", "Classification"]
+
+    @property
+    def task_type(self) -> str:
+        """Get the task type for the metric.
+
+        Returns:
+            str: task type.
+        """
+        return self._task_type
 
     @abstractmethod
     def __call__(self, gt: np.ndarray, pred: np.ndarray) -> float:
@@ -64,7 +73,7 @@ class MeanSquaredError(Metric):
     Task type: "Regression"
     """
 
-    task_type = "Regression"
+    _task_type = "Regression"
 
     def __call__(self, gt: np.ndarray, pred: np.ndarray) -> float:
         """Compute the Mean Squared Error.
@@ -88,7 +97,7 @@ class RootMeanSquaredError(Metric):
     Task type: "Regression"
     """
 
-    task_type = "Regression"
+    _task_type = "Regression"
 
     def __call__(self, gt: np.ndarray, pred: np.ndarray) -> float:
         """Compute the Root Mean Squared Error.
@@ -112,7 +121,7 @@ class MeanAbsoluteError(Metric):
     Task type: "Regression"
     """
 
-    task_type = "Regression"
+    _task_type = "Regression"
 
     def __call__(self, gt: np.ndarray, pred: np.ndarray) -> float:
         """Compute the Mean Absolute Error.
@@ -140,7 +149,7 @@ class Accuracy(Metric):
     Task type: "Classification"
     """
 
-    task_type = "Classification"
+    _task_type = "Classification"
 
     def __call__(self, gt: np.ndarray, pred: np.ndarray) -> float:
         """Compute the Accuracy.
@@ -163,7 +172,7 @@ class Recall(Metric):
     Task type: "Classification"
     """
 
-    task_type = "Classification"
+    _task_type = "Classification"
 
     def __call__(self, gt: np.ndarray, pred: np.ndarray) -> float:
         """Compute the Recall.
@@ -193,7 +202,7 @@ class Precision(Metric):
     Task type: "Classification"
     """
 
-    task_type = "Classification"
+    _task_type = "Classification"
 
     def __call__(self, gt: np.ndarray, pred: np.ndarray) -> float:
         """Compute the Precision.

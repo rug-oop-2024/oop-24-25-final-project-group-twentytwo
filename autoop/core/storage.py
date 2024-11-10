@@ -6,6 +6,7 @@ from glob import glob
 
 class NotFoundError(Exception):
     """Custom exception raised when a path is not found."""
+
     def __init__(self, path: str) -> None:
         """
         Initialize the NotFoundError exception.
@@ -26,6 +27,7 @@ class Storage(ABC):
     Defines the methods for saving, loading, deleting, and listing data in a
     storage system.
     """
+
     @abstractmethod
     def save(self, data: bytes, path: str) -> None:
         """Save data to a given path.
@@ -76,6 +78,7 @@ class LocalStorage(Storage):
     Provides methods to save, load, delete, and list files
     in a specified base directory.
     """
+
     def __init__(self, base_path: str = "./assets") -> None:
         """Initialize the LocalStorage instance with a base path.
 

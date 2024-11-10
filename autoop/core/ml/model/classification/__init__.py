@@ -12,6 +12,7 @@ This module includes:
 Each model class provides methods for fitting and predicting,
 they are implemented as subclasses of the abstract Model class.
 """
+
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier

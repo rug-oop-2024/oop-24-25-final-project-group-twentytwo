@@ -5,13 +5,10 @@ import os
 from app.core.system import AutoMLSystem
 from autoop.core.ml.dataset import Dataset
 
-# Initialize AutoML system
 automl = AutoMLSystem.get_instance()
 
-# Page title
 st.title("Dataset Management")
 
-# Upload dataset
 uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
 
 if uploaded_file is not None:
@@ -21,22 +18,30 @@ if uploaded_file is not None:
         st.write("Preview of the uploaded dataset:")
         st.write(df.head())
 
-    # Convert the DataFrame to a Dataset artifact
     dataset_name = st.text_input("Enter a name for the dataset")
+    version_input = st.text_input("Enter a version")
+
     base_path = automl._storage._base_path
     asset_path = os.path.join(base_path, f"{dataset_name}.csv")
+
     if st.button("Save Dataset"):
-        if dataset_name:
+        if not dataset_name:
+            st.error("Please enter a name for the dataset.")
+        elif not version_input:
+            st.error("Please enter a version for the dataset.")
+        else:
             dataset = Dataset.from_dataframe(
                 df,
                 name=dataset_name,
-                asset_path=f"datasets/{dataset_name}.csv",
+                asset_path=asset_path,
+                version=version_input,
             )
             automl.registry.register(dataset)
-            st.write({asset_path})
-            st.success(f"Dataset '{dataset_name}' saved successfully!")
-        else:
-            st.error("Please enter a name for the dataset.")
+            st.write(f"Dataset saved to: {asset_path}")
+            st.success(
+                f"Dataset '{dataset_name}' v{version_input}\
+                saved successfully!"
+            )
 
 # List existing datasets with delete option
 st.subheader("Existing Datasets")
@@ -52,8 +57,6 @@ if datasets:
         with col2:
             # Button to delete the dataset
             if st.button("Delete", key=f"delete_{dataset.id}"):
-                # Call the registry's delete method
-                # Refresh the dataset list
                 datasets = automl.registry.list(type="dataset")
                 automl.registry.delete(dataset.id)
                 st.rerun()
@@ -62,11 +65,10 @@ if datasets:
         if st.toggle("Preview", key=f"preview_{dataset.id}"):
             st.subheader(f"Preview of '{dataset.name}'")
             try:
-                # Use the asset path for loading the dataset
                 preview_data = pd.read_csv(
                     os.path.join(".", "assets", "objects", dataset.asset_path)
                 )
-                st.dataframe(preview_data.head())  # Show first 5 rows
+                st.dataframe(preview_data.head())
             except Exception as e:
                 st.error(f"Failed to load dataset preview: {e}")
 else:

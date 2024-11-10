@@ -154,27 +154,27 @@ If you did not implement the feature
 | Requirement                           | Type (FN/NF) | Implemented by       | Implementation Completed (add X if done) | Comment | 
 |-------------------------------------- |--------------|----------------------|--------------------------|---------|         
 | Up-to-date requirements.txt           | NF           |  Lennart                    |   X      | | 
-| `ML/detect-features`                  | FN           |  Lennart                    |   X      |In alle ML nog style en typehints! docstrings en import (volgorde) zijn nog uitgeschakelt in pyproject.toml (later nog toevoegen wanneer alle code goed is) |
-| `ML/artifact`                         | NF           |  Lennart                    |         | Nog testen| 
-| `ML/feature`                          | NF           |  Lennart                    |         | Nog testen| 
+| `ML/detect-features`                  | FN           |  Both                    |   X      | |
+| `ML/artifact`                         | NF           |  Lennart                    |         |  | 
+| `ML/feature`                          | NF           |  Lennart                    |         |  | 
 | `ML/metric`                           | NF           |  Lennart                    |   X     | |
-| `ML/metric/extensions`                | FN           |  Lennart                    |   X      | Zie __init__.py |
-| `ML/model`                            | NF           |                      |    X     | |
-| `ML/model/extensions`                 | FN           |                      |    X     | In regressin is nog een import die we denk ik moeten gebruiken|
-| `ML/pipeline/evaluation`              | FN           |                      |    X     | Alle tests zijn ok| 
-| `ST/page/datasets`                    | NF           |                      |         | |
-| `ST/datasets/management/create`       | FN           |                      |         | |
-| `ST/datasets/management/save`         | FN           |                      |         | |
-| `ST/page/modelling`                   | NF           |                      |         | |
-| `ST/modelling/datasets/list`          | FN           |                      |         | |
-| `ST/modelling/datasets/features`      | FN           |                      |         | |
-| `ST/modelling/models`                 | FN           |                      |         | |
-| `ST/modelling/pipeline/split`         | FN           |                      |         | |
-| `ST/modelling/pipeline/metrics`       | FN           |                      |         | |
-| `ST/modelling/pipeline/summary`       | FN           |                      |         | |
-| `ST/modelling/pipeline/train`         | FN           |                      |         | |
-| `ST/modelling/pipeline/save`          | FN           |                      |         | |
-| `ST/page/deployment`                  | FN           |                      |         | |
+| `ML/metric/extensions`                | FN           |  Lennart                    |   X      | |
+| `ML/model`                            | NF           |  Floris                    |    X     | |
+| `ML/model/extensions`                 | FN           |  Floris              |    X     | |
+| `ML/pipeline/evaluation`              | FN           |  Floris                    |    X     | | 
+| `ST/page/datasets`                    | NF           |  Both                    |    X     | |
+| `ST/datasets/management/create`       | FN           |  Both                    |    X     | |
+| `ST/datasets/management/save`         | FN           |  Both                   |     X    | |
+| `ST/page/modelling`                   | NF           |  Both                    |     X    | |
+| `ST/modelling/datasets/list`          | FN           |  Both                    |     X    | |
+| `ST/modelling/datasets/features`      | FN           |  Both                    |    X     | |
+| `ST/modelling/models`                 | FN           |  Both                    |   X     | |
+| `ST/modelling/pipeline/split`         | FN           |  Floris                    |     X    | |
+| `ST/modelling/pipeline/metrics`       | FN           |  Both                    |   X      | |
+| `ST/modelling/pipeline/summary`       | FN           |  Lennart                    |   X      | |
+| `ST/modelling/pipeline/train`         | FN           |  Lennart                    |   X      | |
+| `ST/modelling/pipeline/save`          | FN           |  Lennart                    |     X    | |
+| `ST/page/deployment`                  | FN           |   Lennart                   |     X    | |
 | `ST/deployment/load`                  | FN           |                      |         | |
 | `ST/deployment/predict`               | FN           |                      |         | |
 

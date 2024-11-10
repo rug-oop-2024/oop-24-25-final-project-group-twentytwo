@@ -1,0 +1,12 @@
+```
+# DSC-0005: Deepcopy returns for mutable attributes
+# Date: 2024-11-10
+# Decision: Return deepcopys of private attributes that are mutable (lists, dicts, np.arrays etc..)
+# Motivation: Maintain encapsulation and prevent direct external modification of important attributes.
+# Reason:
+- Using deepcopy return for muttable objects ensures that the object can't be altered, preventing leakage. 
+# Limitations:
+- Storage: returning deepcopys can be quite heavy on storage, especially when large attributes are returned. This can cause a limitation on performance.
+# Alternatives:
+- Shallow Copy: a shallow copy is less expensive, but it can cause leakage of mutable objects.
+```

@@ -3,6 +3,7 @@ import pandas as pd
 import io
 import time
 import os
+import pickle
 
 from app.core.system import AutoMLSystem
 from autoop.core.ml.artifact import Artifact
@@ -10,8 +11,8 @@ from autoop.core.ml.dataset import Dataset
 from autoop.functional.feature import detect_feature_types
 from autoop.core.ml.model import (
     get_model,
-    CLASSIFICATION_MODELS,
-    REGRESSION_MODELS,
+    _CLASSIFICATION_MODELS,
+    _REGRESSION_MODELS,
 )
 from autoop.core.ml.metric import get_metric, METRICS
 from autoop.core.ml.pipeline import Pipeline
@@ -108,9 +109,9 @@ else:
     # Prompt user to select model based on task type
     st.subheader("Select Model")
     available_models = (
-        CLASSIFICATION_MODELS
+        _CLASSIFICATION_MODELS
         if task_type == "Classification"
-        else REGRESSION_MODELS
+        else _REGRESSION_MODELS
     )
     selected_model_name = st.selectbox("Choose a model:", available_models)
     selected_model = get_model(selected_model_name)
@@ -124,7 +125,7 @@ else:
     available_metrics = [
         name
         for name, metric in METRICS.items()
-        if metric.task_type == task_type
+        if metric._task_type == task_type
     ]
     selected_metric_names = st.multiselect(
         "Choose metrics:", available_metrics
@@ -314,21 +315,24 @@ else:
             )
 
         base_path = automl._storage._base_path
-        asset_path = os.path.join(base_path, "path")
+        asset_path = os.path.join(base_path, f"{pipeline_name}")
+        if pipeline_name:
+            serialised_pipeline = pickle.dumps(pipeline)
 
-        artifact = Artifact(
-            name=pipeline_name,
-            version=pipeline_version,
-            asset_path=asset_path,
-            tags=[],
-            metadata=[],
-            data=pipeline,
-            type="pipeline",
-        )
+            artifact = Artifact(
+                name=pipeline_name,
+                version=pipeline_version,
+                asset_path=asset_path,
+                tags=[],
+                metadata=[],
+                data=serialised_pipeline,
+                type="pipeline",
+            )
 
-        automl = AutoMLSystem.get_instance()
-        automl.registry.register(artifact)
+            automl = AutoMLSystem.get_instance()
+            automl.registry.register(artifact)
 
-        st.success(
-            f"Pipeline '{pipeline_name}' v{pipeline_version} has been saved."
-        )
+            st.success(
+                f"Pipeline '{pipeline_name}' v{pipeline_version}\
+                has been saved."
+            )

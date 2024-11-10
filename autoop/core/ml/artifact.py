@@ -2,7 +2,7 @@ import base64
 import re
 from typing import Dict, List, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, PrivateAttr
 
 
 class Artifact(BaseModel):
@@ -41,15 +41,10 @@ class Artifact(BaseModel):
     asset_path: str = Field(..., description="Path to asset")
     name: str = Field(..., description="Name of the artifact")
     version: str = Field(..., description="Version of artifact")
-    data: Optional[bytes] = Field(..., description="Binary data of the asset")
-    metadata: Optional[Dict[str, str]] = Field(
-        default_factory=dict, description="additional data"
-    )
+    data: Optional[bytes] = Field(description="data")
+    _metadata: Optional[Dict[str, str]] = PrivateAttr(default_factory=dict)
     type: str = Field(..., description="Type of the artifact")
-    tags: List[str] = Field(
-        default_factory=list, description="Tags for categorising the artifact"
-    )
-    data: bytes
+    _tags: List[str] = PrivateAttr(default_factory=list)
 
     @property
     def id(self) -> str:
@@ -85,3 +80,39 @@ class Artifact(BaseModel):
         if self.data is None:
             raise ValueError("No data available to read.")
         return self.data
+
+    @property
+    def metadata(self) -> Dict[str, str]:
+        """Getter for metadata.
+
+        Returns:
+            Dict[str, str]: The metadata dictionary.
+        """
+        return self._metadata
+
+    def update_metadata(self, key: str, value: str) -> None:
+        """Updates a key-value pair in the metadata.
+
+        Args:
+            key (str): The metadata key to update.
+            value (str): The new value for the metadata key.
+        """
+        self._metadata[key] = value
+
+    @property
+    def tags(self) -> List[str]:
+        """Getter for tags.
+
+        Returns:
+            List[str]: The list of tags for the artifact.
+        """
+        return self._tags
+
+    def add_tag(self, tag: str) -> None:
+        """Adds a tag to the artifact.
+
+        Args:
+            tag (str): The tag to add.
+        """
+        if tag not in self._tags:
+            self._tags.append(tag)

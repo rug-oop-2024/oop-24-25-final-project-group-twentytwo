@@ -11,7 +11,7 @@ def train_and_evaluate_model(
     input_features: List[str],
     target_feature: str,
     metrics: List[str],
-    split: Dict[str, float]
+    split: Dict[str, float],
 ) -> Dict[str, Any]:
     """
     Train and evaluate a single model using the specified dataset, features,
@@ -52,7 +52,7 @@ def evaluate_models_parallel(
     input_features: List[str],
     target_feature: str,
     metrics: List[str],
-    split: Dict[str, float]
+    split: Dict[str, float],
 ) -> List[Dict[str, Any]]:
     """
     Train and evaluate multiple models in parallel.

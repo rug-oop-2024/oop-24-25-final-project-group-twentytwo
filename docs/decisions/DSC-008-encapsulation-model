@@ -1,0 +1,15 @@
+```
+# DSC-008: Improve Encapsulation in `Model` Class
+# Date: 2024-11-10
+# Decision: Make the `_parameters` attribute private to ensure controlled access through getter and setter methods.
+# Status: Accepted
+# Motivation: Protect internal model parameters from direct external modification.
+# Reason:
+- The `_parameters` attribute stores configuration data for the model. Allowing direct access to this data could lead to unintended modifications, breaking the internal logic of the model.
+- Making `_parameters` a private attribute (using the `__parameters` naming convention) ensures that the data should not be accessed directly from outside the class.
+- Providing controlled access through getter (`get_parameters()`) and setter (`set_parameters()`) methods allows validation or logging to be added in the future if necessary.
+# Limitations:
+- The introduction of getter and setter methods can add complexity for simple use cases, though this is not a big problem in practice.
+# Alternatives:
+- Leave the `_parameters` attribute public, making it easier to access but at the cost of potential leakage and inconsistent state management.
+```

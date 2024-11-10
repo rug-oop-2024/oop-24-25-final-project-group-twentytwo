@@ -13,8 +13,10 @@ Each model class provides methods for fitting and predicting,
 they handle both initialization and model-specific configurations as subclasses
 of the abstract Model class.
 """
-from autoop.core.ml.model.regression.multiple_linear_regression \
-    import MultipleLinearRegression
+
+from autoop.core.ml.model.regression.multiple_linear_regression import (
+    MultipleLinearRegression,
+)
 import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
