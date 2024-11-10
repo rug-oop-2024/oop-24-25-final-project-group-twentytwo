@@ -155,8 +155,8 @@ If you did not implement the feature
 |-------------------------------------- |--------------|----------------------|--------------------------|---------|         
 | Up-to-date requirements.txt           | NF           |  Lennart                    |   X      | | 
 | `ML/detect-features`                  | FN           |  Both                    |   X      | |
-| `ML/artifact`                         | NF           |  Lennart                    |         |  | 
-| `ML/feature`                          | NF           |  Lennart                    |         |  | 
+| `ML/artifact`                         | NF           |  Lennart                    |    X     |  | 
+| `ML/feature`                          | NF           |  Lennart                    |    X     |  | 
 | `ML/metric`                           | NF           |  Lennart                    |   X     | |
 | `ML/metric/extensions`                | FN           |  Lennart                    |   X      | |
 | `ML/model`                            | NF           |  Floris                    |    X     | |
