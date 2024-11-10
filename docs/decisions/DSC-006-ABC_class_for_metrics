@@ -1,0 +1,15 @@
+```
+# DSC-0006: Use of Abstract Base Class (ABC) for Metric Class
+# Date: 2024-11-10
+# Decision: Use Abstract Base Class (ABC) for defining the "Metric" class.
+# Status: Accepted
+# Motivation: Ensure that all metric classes implement a consistent interface and provide a clear structure for different metric implementations.
+# Reason:
+- Enforced Consistency: Using an abstract base class enforces that all subclasses (like "MeanSquaredError", "Accuracy", etc.) implement the "__call__" method. 
+- Extendability: By using ABC, it's easier to add new metrics in the future. You can simply subclass "Metric" and implement the "__call__" method without worrying about defining a custom interface. This encourages modularity and scalability.
+# Limitations:
+- Complexity: Introducing an abstract base class adds an extra layer of complexity, especially for developers who are not familiar with the concept of ABCs.
+- Overhead for Simple Metrics**: For very simple metric classes, the overhead of defining an ABC might not be necessary. However, for larger and more complex metric systems, the benefits of an ABC outweigh the downsides.
+# Alternatives:
+- No Base Class: avoid using a base class altogether, treating each metric as a standalone class. However, this would result in repeated code reducing code reusability and maintainability.
+```

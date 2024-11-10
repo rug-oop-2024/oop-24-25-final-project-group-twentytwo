@@ -1,0 +1,14 @@
+[tool.ruff]
+line-length = 79  
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "C90"]  # Include other error codes you want to check for
+ignore = ["ANN101", "ANN102", "D100", "D2", "D4", "ANN002", "ANN003"]
+exclude = ["autoop/tests", ".github"]  # Exclude specific directories
+
+[tool.docformatter]
+wrap-summaries = 79
+wrap-descriptions = 79
+in-place = true
+exclude = ["autoop/tests", ".github"]
+black = true
