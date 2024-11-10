@@ -12,27 +12,35 @@ class MultipleLinearRegression(Model, BaseModel):
     Class implementing Multiple Linear Regression model.
 
     Attributes:
-        parameters: dict
+        parameters (Dict[str, np.ndarray]): Dictionary containing the model
+        parameters.
 
     Methods:
         fit(observations: np.ndarray, ground_truth: np.ndarray) -> None:
-        predict(observations: np.ndarray) -> np.ndarray:
+            Fits the model to the provided observations and ground truth.
 
-        - The normal equation used to calculate the weights is:
-            w = (X^T * X)^-1 * X^T * y
+        predict(observations: np.ndarray) -> np.ndarray:
+            Predicts outcomes based on the provided observations.
     """
 
     _parameters: Dict[str, np.ndarray] = PrivateAttr(default_factory=dict)
 
     def fit(self, observations: np.ndarray, ground_truth: np.ndarray) -> None:
         """
-        Fit the model to the provided observationsand ground truth.
+        Fit the model to the provided observations and ground truth.
+
+        The normal equation used to calculate the weights is:
+        w = (X^T * X)^-1 * X^T * y
 
         Args:
-            observations (np.ndarray): The observations as a 2D array
-                with samples in the rows and features in the columns.
-            ground_truth (np.ndarray): The ground truth as a 1D array
-                with the same number of samples as observations.
+            observations (np.ndarray): The observations as a 2D array with
+                                    samples in rows and features in columns.
+            ground_truth (np.ndarray): The ground truth as a 1D array with
+                                    the same number of samples as observations.
+
+        Raises:
+            ValueError: If the number of samples in observations
+                        and ground_truth does not match.
         """
 
         if observations.shape[0] != ground_truth.shape[0]:
@@ -55,11 +63,14 @@ class MultipleLinearRegression(Model, BaseModel):
         Predict outcomes based on the provided observations.
 
         Args:
-            observations (np.ndarray): The observations (features)\
-                  as a 2D array
-            with samples in the rows and features in the columns.
+            observations (np.ndarray): The observations (features) as a 2D
+                            array with samples in rows and features in columns.
+
         Returns:
             np.ndarray: The predicted outcomes as a 1D array.
+
+        Raises:
+            ValueError: If observations are not a 2D array.
         """
         # Validate dimensions
         if observations.ndim != 2:
@@ -74,5 +85,10 @@ class MultipleLinearRegression(Model, BaseModel):
 
     @property
     def parameters(self) -> Dict[str, np.ndarray]:
-        "read-only access to model parameters"
+        """
+        Access the model parameters.
+
+        Returns:
+            Dict[str, np.ndarray]: Dictionary containing the model parameters.
+        """
         return self._parameters

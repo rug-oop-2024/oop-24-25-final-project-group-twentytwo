@@ -32,7 +32,7 @@ class Model(ABC):
         Args:
             observations (np.ndarray): The input data to fit the model.
             ground_truth (np.ndarray): The actual values to train the model
-            against.
+                                       against.
         """
         pass
 
